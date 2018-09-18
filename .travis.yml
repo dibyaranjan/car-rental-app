@@ -9,5 +9,6 @@ services:
 install: true
 
 script : 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker pull dibyaranjan3177/car-rental-app
   - docker push dibyaranjan3177/car-rental-app
