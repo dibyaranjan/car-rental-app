@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/login.css" />
+
+    <title>Login</title>
+</head>
+<body>
+
+<div class="text-center" style="padding:50px 0">
+    <div class="logo">login</div>
+    <div class="login-form-1">
+        <form id="login-form" class="text-left">
+            <div class="login-form-main-message"></div>
+            <div class="main-login-form">
+                <div class="login-group">
+                    <div class="form-group">
+                        <label for="lg_username" class="sr-only">Username</label>
+                        <input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="Username" autocomplete="off"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="lg_password" class="sr-only">Password</label>
+                        <input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="Password">
+                    </div>
+                    <div class="form-group login-group-checkbox">
+                        <input type="checkbox" id="lg_remember" name="lg_remember">
+                        <label for="lg_remember">remember</label>
+                        <a href="#" id = "submit"><i class="fa fa-chevron-right"></i>Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="etc-login-form">
+                <p>Forgot your password? <a href="forgot_password.html">click here</a></p>
+                <p>New user? <a href="#">create new account</a></p>
+            </div>
+        </form>
+    </div>
+    <!-- end:Main Form -->
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#submit").click(function () {
+            var userDetails = new Object();
+            userDetails.userName = $("#lg_username").val();
+            userDetails.password = $("#lg_password").val();
+
+            $.ajax({
+                url : "/login.action",
+                method : "POST",
+                data : JSON.stringify(userDetails),
+                contentType: "application/json; charset=utf-8"
+            });
+        });
+    });
+</script>
+
+<!-- Optional JavaScript -->
+<script>
+    (function($) {
+        "use strict";
+
+        // Options for Message
+        //----------------------------------------------
+        var options = {
+            'btn-loading': '<i class="fa fa-spinner fa-pulse"></i>',
+            'btn-success': '<i class="fa fa-check"></i>',
+            'btn-error': '<i class="fa fa-remove"></i>',
+            'msg-success': 'All Good! Redirecting...',
+            'msg-error': 'Wrong login credentials!',
+            'useAJAX': true,
+        };
+
+        // Login Form
+        //----------------------------------------------
+        // Validation
+
+
+        // Form Submission
+        $("#login-form").submit(function() {
+            remove_loading($(this));
+
+            if(options['useAJAX'] == true)
+            {
+                // Dummy AJAX request (Replace this with your AJAX code)
+                // If you don't want to use AJAX, remove this
+                dummy_submit_form($(this));
+
+                // Cancel the normal submission.
+                // If you don't want to use AJAX, remove this
+                return false;
+            }
+        });
+
+        // Loading
+        //----------------------------------------------
+        function remove_loading($form)
+        {
+            $form.find('[type=submit]').removeClass('error success');
+            $form.find('.login-form-main-message').removeClass('show error success').html('');
+        }
+
+        function form_loading($form)
+        {
+            $form.find('[type=submit]').addClass('clicked').html(options['btn-loading']);
+        }
+
+        function form_success($form)
+        {
+            $form.find('[type=submit]').addClass('success').html(options['btn-success']);
+            $form.find('.login-form-main-message').addClass('show success').html(options['msg-success']);
+        }
+
+        function form_failed($form)
+        {
+            $form.find('[type=submit]').addClass('error').html(options['btn-error']);
+            $form.find('.login-form-main-message').addClass('show error').html(options['msg-error']);
+        }
+
+        // Dummy Submit Form (Remove this)
+        //----------------------------------------------
+        // This is just a dummy form submission. You should use your AJAX function or remove this function if you are not using AJAX.
+        function dummy_submit_form($form)
+        {
+            if($form.valid())
+            {
+                form_loading($form);
+
+                setTimeout(function() {
+                    form_success($form);
+                }, 2000);
+            }
+        }
+
+    })(jQuery);
+</script>
+</body>
+</html>
