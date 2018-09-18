@@ -6,4 +6,7 @@ sudo: required
 services:
   - docker
 
-install: "mvn clean install dockerfile:push"
+install: true
+
+script : 
+  - docker pull dibyaranjan3177/car-rental-app
