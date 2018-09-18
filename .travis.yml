@@ -10,3 +10,4 @@ install: true
 
 script : 
   - docker pull dibyaranjan3177/car-rental-app
+  - docker push dibyaranjan3177/car-rental-app
