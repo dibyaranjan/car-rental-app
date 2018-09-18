@@ -5,3 +5,5 @@ sudo: required
 
 services:
   - docker
+
+install: "mvn clean install docker:push"
