@@ -11,3 +11,8 @@ script :
   - mvn clean install dockerfile:push
 
 install: true
+
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
