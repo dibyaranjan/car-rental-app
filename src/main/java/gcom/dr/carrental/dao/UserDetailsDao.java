@@ -1,9 +1,11 @@
 package gcom.dr.carrental.dao;
 
 import gcom.dr.carrental.model.UserDetails;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserDetailsDao implements UserDao {
     private static List<UserDetails> userDetails;
@@ -13,12 +15,13 @@ public class UserDetailsDao implements UserDao {
     }
     @Override
     public UserDetails getUserDetailsByUserName(String userName) {
-        for(UserDetails userDetail : userDetails) {
-            if (userName.equals(userDetail.getUserName())) {
-                return userDetail;
+        Optional<UserDetails> userDetails = UserDetailsDao.userDetails.stream().filter(user -> {
+            if (StringUtils.equals(userName, user.getUserName())) {
+                return true;
             }
-        }
+            return false;
+        }).findFirst();
 
-        return null;
+        return userDetails.orElse(null);
     }
 }

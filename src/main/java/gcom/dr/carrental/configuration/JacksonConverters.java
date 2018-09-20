@@ -27,8 +27,7 @@ public class JacksonConverters {
 
     @Bean
     public WebMvcConfigurer testing() {
-        //WebMvcConfigurer
-        return new WebMvcConfigurerAdapter() {
+        return new WebMvcConfigurer() {
             @Override
             public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
                 Map<Class<?>, Converter<Map<String, String>, JsonRequest>> converterMap = new LinkedHashMap<>();
