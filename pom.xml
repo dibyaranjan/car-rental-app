@@ -84,7 +84,7 @@
                 </executions>
                 <configuration>
                     <repository>docker.io/dibyaranjan3177/car-rental-app</repository>
-                    <tag>1.0.alpha-1</tag>
+                    <tag>${PACKAGE_VERSION}</tag>
                 </configuration>
             </plugin>
 
