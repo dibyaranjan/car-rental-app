@@ -84,7 +84,7 @@
                 </executions>
                 <configuration>
                     <repository>docker.io/dibyaranjan3177/car-rental-app</repository>
-                    <tag>${PACKAGE_VERSION}</tag>
+                    <tag>${project.version}.${TRAVIS_BUILD_NUMBER}</tag>
                 </configuration>
             </plugin>
 
