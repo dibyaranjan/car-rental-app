@@ -6,13 +6,9 @@ sudo: required
 services:
   - docker
 
-if: branch = master
-  script :
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - mvn clean install dockerfile:push
-
-script:
-  - mvn clean install
+script :
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - mvn clean install dockerfile:push
 
 install: true
 
