@@ -6,9 +6,19 @@ sudo: required
 services:
   - docker
 
-script : 
+script :
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - mvn clean install dockerfile:push
+  - if [$TRAVIS_BRANCH=="master"];
+      then mvn clean install dockerfile:push;
+    else
+      mvn clean test;
+    fi
+
+#  - if [ $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "development" ]; then
+#      echo "# Bump version and flyway migrate db";
+#    else
+#      echo "Skip version increment!";
+#    fi
 
 install: true
 
