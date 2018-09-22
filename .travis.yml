@@ -4,24 +4,15 @@ jdk:
 sudo: required
 
 services:
-  - docker
+- docker
 
 script :
-  - mvn clean test;
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- if [ "$TRAVIS_BRANCH" == "master" ]; then mvn clean install dockerfile:build; else mvn test; fi
 
 install: true
-
-deploy:
-  script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - mvn clean install dockerfile:push
-  on:
-    branch: master
 
 cache:
   directories:
   - .autoconf
   - $HOME/.m2
-
-env:
-- PACKAGE_VERSION="1.0.*"
