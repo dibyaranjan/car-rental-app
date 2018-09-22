@@ -8,7 +8,7 @@ services:
 
 script :
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - if [$TRAVIS_BRANCH=="master"]; then mvn clean install dockerfile:push; else echo "Not building"; fi
+  - if [$TRAVIS_BRANCH=="master"]; then mvn clean install dockerfile:push; fi
 
 #  - if [ $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "development" ]; then
 #      echo "# Bump version and flyway migrate db";
