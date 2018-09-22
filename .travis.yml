@@ -7,12 +7,11 @@ services:
   - docker
 
 script :
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - mvn clean install dockerfile:push
-  - if [ $TRAVIS_PULL_REQUEST == false && $TRAVIS_BRANCH == "development" ]; then
-      echo "# Bump version and flyway migrate db";
+  - if [$TRAVIS_BRANCH == "master" ]; then
+      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+      mvn clean install dockerfile:push;
     else
-      echo "Skip version increment!";
+      mvn clean install;
     fi
 
 install: true
