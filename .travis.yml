@@ -8,7 +8,6 @@ services:
 
 script :
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- echo $TRAVIS_BRANCH
 - if [ "$TRAVIS_BRANCH" == "master" ]; then mvn clean install dockerfile:build; else mvn test; fi
 
 install: true
