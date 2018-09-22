@@ -7,7 +7,10 @@ services:
   - docker
 
 script :
-  - mvn clean test;
+  - mvn clean test
+  branches:
+    only:
+    - master
 
 install: true
 
