@@ -16,12 +16,9 @@ deploy:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - mvn clean install dockerfile:push
   on:
-    branch: master
+    branch: feature/2-CI-Improvements
 
 cache:
   directories:
   - .autoconf
   - $HOME/.m2
-
-env:
-- PACKAGE_VERSION="1.0.*"
