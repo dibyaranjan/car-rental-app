@@ -8,10 +8,12 @@ services:
 
 script :
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- if ["$TRAVIS_BRANCH" == "master" ];then
+- if [$TRAVIS_BRANCH == "master" ];then
+    echo "Building master"
     mvn versions:set -DremoveSnapshot;
     mvn clean install dockerfile:push;
   else
+    echo "Building branch"
     mvn test;
   fi
 
