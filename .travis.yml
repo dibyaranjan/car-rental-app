@@ -10,11 +10,7 @@ script :
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 # mvn clean install dockerfile:push
 - echo $TRAVIS_BRANCH
-- if ["$TRAVIS_BRANCH" == "feature/2-CI-Improvements"]; then
-    echo "# Bump version and flyway migrate db";
-  else
-    echo "Skip version increment!";
-  fi
+- if [ "$TRAVIS_BRANCH" == "feature/2-CI-Improvements" ]; then se-interpreter test/selenium/interpreter_config.json; fi
 
 install: true
 
